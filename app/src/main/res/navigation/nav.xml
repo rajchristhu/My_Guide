@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/home2"
+    tools:ignore="UnusedNavigation">
+
+    <fragment
+        android:id="@+id/friendFinding"
+        android:name="team.cesea.myguide.UI.Landing.FriendFinding"
+        android:label="friend_finding_fragment"
+        tools:layout="@layout/friend_finding_fragment" />
+    <fragment
+        android:id="@+id/home2"
+        android:name="team.cesea.myguide.UI.Landing.home"
+        android:label="home_fragment"
+        tools:layout="@layout/home_fragment" />
+    <fragment
+        android:id="@+id/group"
+        android:name="team.cesea.myguide.UI.Landing.Group"
+        android:label="group_fragment"
+        tools:layout="@layout/group_fragment" />
+</navigation>

@@ -23,17 +23,8 @@
             android:id="@+id/action_login_to_getStart2"
             app:destination="@id/getStart" />
         <action
-            android:id="@+id/action_login_to_landingPage"
-            app:destination="@id/landingPage" />
-    </fragment>
-    <fragment
-        android:id="@+id/landingPage"
-        android:name="team.cesea.myguide.UI.LandingPage"
-        android:label="landing_pag_fragment"
-        tools:layout="@layout/landing_pag_fragment" >
-        <action
-            android:id="@+id/action_landingPage_to_login"
-            app:destination="@id/login" />
+            android:id="@+id/action_login_to_land2"
+            app:destination="@id/land2" />
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
@@ -44,4 +35,9 @@
             android:id="@+id/action_splashScreen_to_getStart"
             app:destination="@id/getStart" />
     </fragment>
+    <activity
+        android:id="@+id/land2"
+        android:name="team.cesea.myguide.UI.Land"
+        android:label="activity_land"
+        tools:layout="@layout/activity_land" />
 </navigation>
