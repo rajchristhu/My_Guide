@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    tools:ignore="UnusedNavigation"
+    app:startDestination="@id/splashScreen">
+    <fragment
+        android:id="@+id/getStart"
+        android:name="team.cesea.myguide.UI.GetStart"
+        android:label="get_start_fragment"
+        tools:layout="@layout/get_start_fragment" >
+        <action
+            android:id="@+id/action_getStart_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/login"
+        android:name="team.cesea.myguide.UI.Login"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_login_to_getStart2"
+            app:destination="@id/getStart" />
+        <action
+            android:id="@+id/action_login_to_landingPage"
+            app:destination="@id/landingPage" />
+    </fragment>
+    <fragment
+        android:id="@+id/landingPage"
+        android:name="team.cesea.myguide.UI.LandingPage"
+        android:label="landing_pag_fragment"
+        tools:layout="@layout/landing_pag_fragment" >
+        <action
+            android:id="@+id/action_landingPage_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="team.cesea.myguide.UI.SplashScreen"
+        android:label="splash_screen_fragment"
+        tools:layout="@layout/splash_screen_fragment" >
+        <action
+            android:id="@+id/action_splashScreen_to_getStart"
+            app:destination="@id/getStart" />
+    </fragment>
+</navigation>
