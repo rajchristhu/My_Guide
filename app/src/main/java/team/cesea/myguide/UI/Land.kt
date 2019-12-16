@@ -12,4 +12,8 @@ class Land : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_land)
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
 }

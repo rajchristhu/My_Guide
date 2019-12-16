@@ -54,7 +54,16 @@
 
     </com.gauravk.bubblenavigation.BubbleNavigationConstraintView>
 
-
+    <fragment
+        android:id="@+id/fragment3"
+        android:name="team.cesea.myguide.UI.Landing.home"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/top_navigation_constraint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
