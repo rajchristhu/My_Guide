@@ -9,19 +9,12 @@
         android:id="@+id/getStart"
         android:name="team.cesea.myguide.UI.GetStart"
         android:label="get_start_fragment"
-        tools:layout="@layout/get_start_fragment" >
-        <action
-            android:id="@+id/action_getStart_to_login"
-            app:destination="@id/login" />
-    </fragment>
+        tools:layout="@layout/get_start_fragment" />
     <fragment
         android:id="@+id/login"
         android:name="team.cesea.myguide.UI.Login"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" >
-        <action
-            android:id="@+id/action_login_to_getStart2"
-            app:destination="@id/getStart" />
         <action
             android:id="@+id/action_login_to_land2"
             app:destination="@id/land2" />
@@ -32,8 +25,11 @@
         android:label="splash_screen_fragment"
         tools:layout="@layout/splash_screen_fragment" >
         <action
-            android:id="@+id/action_splashScreen_to_getStart"
-            app:destination="@id/getStart" />
+            android:id="@+id/action_splashScreen_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_splashScreen_to_land2"
+            app:destination="@id/land2" />
     </fragment>
     <activity
         android:id="@+id/land2"

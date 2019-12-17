@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -20,14 +19,16 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.android.synthetic.main.login_fragment.*
-import org.jetbrains.anko.toast
 import team.cesea.myguide.R
+import team.cesea.myguide.UI.adapter.SliderAdapter
+import team.cesea.myguide.utilities.SessionMaintainence
 
 class Login : Fragment() {
     val navOptions = NavOptions.Builder().setPopUpTo(R.id.login, true).build()
     val RC_SIGN_IN: Int = 1
     lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
+    var slogan: ArrayList<String>? = null
 
     lateinit var mGoogleSignInOptions: GoogleSignInOptions
 
@@ -49,6 +50,14 @@ class Login : Fragment() {
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         firebaseAuth = FirebaseAuth.getInstance()
         configureGoogleSignIn()
+        val sliderImage = ArrayList<Int>()
+        sliderImage.add(R.drawable.ic_android_black_24dp)
+        sliderImage.add(R.drawable.ic_android_black_24dp)
+        sliderImage.add(R.drawable.ic_android_black_24dp)
+
+        slogan = arrayListOf<String>("Confident Coding!!", "Explore Many!!", "Make Peaceful Life!!")
+        viewPager.adapter = SliderAdapter(activity!!, sliderImage, slogan!!)
+        indicator.setupWithViewPager(viewPager, true)
         button2.setOnClickListener {
             Navigation.findNavController(requireActivity(), R.id.fragment)
                 .navigate(
@@ -61,11 +70,7 @@ class Login : Fragment() {
             signIn()
         }
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            Navigation.findNavController(requireActivity(), R.id.fragment)
-                .navigate(
-                    R.id.action_login_to_getStart2, null,
-                    navOptions
-                )
+            activity!!.finishAffinity()
         }
         callback.isEnabled = true
     }
@@ -91,7 +96,6 @@ class Login : Fragment() {
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
-                Toast.makeText(activity!!, "Google sign in failed:(", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -101,12 +105,29 @@ class Login : Fragment() {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 val user = firebaseAuth.currentUser
-
-                activity!!.toast(user!!.displayName.toString())
-//                startActivity(HomeActivity.getLaunchIntent(this))
+                val instance = SessionMaintainence.instance!!
+                instance.Uid = user!!.uid
+                instance.profilepic = user.photoUrl.toString()
+                instance.fullname = user.displayName
+                Navigation.findNavController(requireActivity(), R.id.fragment)
+                    .navigate(
+                        R.id.action_login_to_land2, null,
+                        navOptions
+                    )
             } else {
-                Toast.makeText(activity, "Google sign in failed:(", Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            Navigation.findNavController(requireActivity(), R.id.fragment)
+                .navigate(
+                    R.id.action_login_to_land2, null,
+                    navOptions
+                )
         }
     }
 }

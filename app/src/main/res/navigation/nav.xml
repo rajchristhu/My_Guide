@@ -21,4 +21,9 @@
         android:name="team.cesea.myguide.UI.Landing.Group"
         android:label="group_fragment"
         tools:layout="@layout/group_fragment" />
+    <activity
+        android:id="@+id/land"
+        android:name="team.cesea.myguide.UI.Land"
+        android:label="activity_land"
+        tools:layout="@layout/activity_land" />
 </navigation>

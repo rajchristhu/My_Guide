@@ -31,13 +31,7 @@ class GetStart : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(GetStartViewModel::class.java)
-        button.setOnClickListener {
-            Navigation.findNavController(requireActivity(), R.id.fragment)
-                .navigate(
-                    R.id.action_getStart_to_login, null,
-                    navOptions
-                )
-        }
+
     }
 
 }

@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorAccent"
+    android:clickable="true"
+
     android:layout_height="match_parent"
     tools:context=".UI.Land">
     <com.gauravk.bubblenavigation.BubbleNavigationConstraintView
         android:id="@+id/top_navigation_constraint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="10dp"
         android:background="@drawable/round"
         android:elevation="4dp"
         android:padding="12dp"
@@ -23,31 +26,31 @@
             android:id="@+id/c_item_rest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:bt_colorActive="#000"
-            app:bt_colorInactive="#000"
+            app:bt_colorActive="@color/colorPrimary"
+            app:bt_colorInactive="@color/colorPrimary"
             app:bt_icon="@drawable/ic_android_black_24dp"
             app:bt_shape="@drawable/lli"
-            app:bt_title="restaurant" />
+            app:bt_title="Home" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/c_item_rest2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:bt_colorActive="#000"
-            app:bt_colorInactive="#000"
+            app:bt_colorActive="@color/colorPrimary"
+            app:bt_colorInactive="@color/colorPrimary"
             app:bt_icon="@drawable/ic_android_black_24dp"
             app:bt_shape="@drawable/lli"
-            app:bt_title="restaurant" />
+            app:bt_title="Group" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:id="@+id/c_item_rest3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:bt_colorActive="#000"
-            app:bt_colorInactive="#000"
+            app:bt_colorActive="@color/colorPrimary"
+            app:bt_colorInactive="@color/colorPrimary"
             app:bt_icon="@drawable/ic_android_black_24dp"
             app:bt_shape="@drawable/lli"
-            app:bt_title="restaurant" />
+            app:bt_title="Friend" />
 
 
         <!-- Add more child items here - max upto 5 -->
@@ -56,7 +59,7 @@
 
     <fragment
         android:id="@+id/fragment3"
-        android:name="team.cesea.myguide.UI.Landing.home"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"

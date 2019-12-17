@@ -10,6 +10,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import kotlinx.coroutines.*
 import team.cesea.myguide.R
+import team.cesea.myguide.utilities.SessionMaintainence
 import kotlin.coroutines.CoroutineContext
 
 class SplashScreen : Fragment(), CoroutineScope {
@@ -37,11 +38,20 @@ class SplashScreen : Fragment(), CoroutineScope {
         launch {
             delay(3000)
             withContext(Dispatchers.Main) {
-                Navigation.findNavController(requireActivity(), R.id.fragment)
-                    .navigate(
-                        R.id.action_splashScreen_to_getStart, null,
-                        navOptions
-                    )
+                val instance = SessionMaintainence.instance!!
+                if (instance.Uid == "") {
+                    Navigation.findNavController(requireActivity(), R.id.fragment)
+                        .navigate(
+                            R.id.action_splashScreen_to_login, null,
+                            navOptions
+                        )
+                } else {
+                    Navigation.findNavController(requireActivity(), R.id.fragment)
+                        .navigate(
+                            R.id.action_splashScreen_to_land2, null,
+                            navOptions
+                        )
+                }
             }
         }
     }
