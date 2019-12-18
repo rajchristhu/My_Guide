@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavOptions
 import kotlinx.android.synthetic.main.activity_land.*
+import org.jetbrains.anko.toast
 import team.cesea.myguide.R
 import team.cesea.myguide.UI.Landing.FriendFinding
 import team.cesea.myguide.UI.Landing.Group
@@ -19,15 +20,24 @@ class Land : AppCompatActivity() {
         setContentView(R.layout.activity_land)
         changesFragment(home(), "home")
         top_navigation_constraint.setNavigationChangeListener { view, position ->
+            val fragmentManager = supportFragmentManager
+            val currentFragment = fragmentManager.findFragmentById(R.id.fragment3)
             when (position) {
                 0 -> {
-                    changesFragment(home(), "home")
+                    if (currentFragment!!.tag != "home") {
+                        changesFragment(home(), "home")
+                    }
                 }
                 1 -> {
-                    changesFragment(Group(), "group")
+                    if (currentFragment!!.tag != "group") {
+
+                        changesFragment(Group(), "group")
+                    }
                 }
                 2 -> {
-                    changesFragment(FriendFinding(), "frd")
+                    if (currentFragment!!.tag != "frd") {
+                        changesFragment(FriendFinding(), "frd")
+                    }
                 }
             }
         }
@@ -37,14 +47,14 @@ class Land : AppCompatActivity() {
         super.onBackPressed()
         val fragmentManager = supportFragmentManager
         val currentFragment = fragmentManager.findFragmentById(R.id.fragment3)
-//        when (currentFragment!!.tag) {
-//            "home" -> top_navigation_constraint.setCurrentActiveItem(0)
-//            "group" -> top_navigation_constraint.setCurrentActiveItem(1)
-//            "frd" -> top_navigation_constraint.setCurrentActiveItem(2)
-//            else ->
-//                finishAffinity()
-//
-//        }
+        when (currentFragment!!.tag) {
+            "home" -> top_navigation_constraint.setCurrentActiveItem(0)
+            "group" -> top_navigation_constraint.setCurrentActiveItem(1)
+            "frd" -> top_navigation_constraint.setCurrentActiveItem(2)
+            else ->
+                finishAffinity()
+
+        }
 
 
     }
@@ -53,7 +63,7 @@ class Land : AppCompatActivity() {
     private fun changesFragment(targetFragment: Fragment, tag: String) {
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment3, targetFragment, tag)
+            .add(R.id.fragment3, targetFragment, tag)
             .addToBackStack(null)
             .commit()
     }

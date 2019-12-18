@@ -17,4 +17,10 @@
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/colorPrimaryDark</item>
         <!--        <item name="android:windowLightStatusBar">true</item>-->
     </style>
+    <style name="MyAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/colorAccent</item>
+    </style>
 </resources>
