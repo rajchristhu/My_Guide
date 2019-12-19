@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.dialog.view.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import team.cesea.myguide.R
@@ -55,7 +56,7 @@ class home : Fragment() {
             recyada(activity!!)
         dss.adapter = jobpostHorizontalAdapter
         dss.isNestedScrollingEnabled = false;
-        name.text = "Hi," + instance.fullname
+        name.text = "Hi ," + instance.fullname
         date.text = current_date()
         Glide.with(context!!)
             .load(instance.profilepic)
@@ -63,6 +64,9 @@ class home : Fragment() {
             .into(userimages)
         addmone.setOnClickListener {
             showDiag()
+        }
+        icon.setOnClickListener {
+            bottomSheetshow()
         }
         val onScrollChangedListener = ViewTreeObserver.OnScrollChangedListener {
             val scrollY = re.scrollY;
@@ -201,5 +205,12 @@ class home : Fragment() {
             anim.start()
         }
 
+    }
+
+    fun bottomSheetshow() {
+        val view = layoutInflater.inflate(R.layout.bottom_sheet_dialog, null)
+        val dialog = BottomSheetDialog(context!!, R.style.AppBottomSheetDialogTheme) // Style here
+        dialog.setContentView(view)
+        dialog.show()
     }
 }

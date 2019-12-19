@@ -361,7 +361,9 @@
                     android:background="@color/colorPrimary">
 
                     <ImageView
-                        android:id="@+id/imageView8"
+                        android:id="@+id/icon"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
@@ -369,7 +371,8 @@
                         app:layout_constraintBottom_toBottomOf="@+id/textView15"
                         app:layout_constraintStart_toEndOf="@+id/divider"
                         app:layout_constraintTop_toTopOf="@+id/textView15"
-                        app:srcCompat="@drawable/ic_info_outline_black_24dp" />
+                        app:srcCompat="@drawable/ic_info_outline_black_24dp"
+                        tools:ignore="VectorDrawableCompat" />
 
                     <TextView
                         android:id="@+id/textView15"
@@ -380,7 +383,7 @@
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/open_sans"
                         android:text="Explanation of process"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView8"
+                        app:layout_constraintEnd_toStartOf="@+id/icon"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
