@@ -36,7 +36,7 @@ class SplashScreen : Fragment(), CoroutineScope {
 
         viewModel = ViewModelProviders.of(this).get(SplashScreenViewModel::class.java)
         launch {
-            delay(3000)
+            delay(2000)
             withContext(Dispatchers.Main) {
                 val instance = SessionMaintainence.instance!!
                 if (instance.Uid == "") {
