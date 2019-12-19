@@ -6,24 +6,24 @@ import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.dialog.*
 import kotlinx.android.synthetic.main.dialog.view.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import team.cesea.myguide.R
+import team.cesea.myguide.UI.adapter.recyada
 import team.cesea.myguide.utilities.SessionMaintainence
 import java.util.*
 
@@ -43,11 +43,18 @@ class home : Fragment() {
         return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("SetTextI18n")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val instance = SessionMaintainence.instance!!
+        val RecyclerViewLayoutManager = LinearLayoutManager(context)
+        dss.layoutManager = RecyclerViewLayoutManager
+        val jobpostHorizontalAdapter =
+            recyada(activity!!)
+        dss.adapter = jobpostHorizontalAdapter
+        dss.isNestedScrollingEnabled = false;
         name.text = "Hi," + instance.fullname
         date.text = current_date()
         Glide.with(context!!)
@@ -56,14 +63,43 @@ class home : Fragment() {
             .into(userimages)
         addmone.setOnClickListener {
             showDiag()
-//            addmo.visibility = View.VISIBLE
-//            addmone.visibility = View.GONE
-//            add.visibility = View.VISIBLE
-//            addtwo.visibility = View.VISIBLE
-//            add.requestFocus()
-//            add.isFocusableInTouchMode = true
-//            val imm = activity!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
-//            imm!!.showSoftInput(add, InputMethodManager.SHOW_FORCED)
+        }
+        val onScrollChangedListener = ViewTreeObserver.OnScrollChangedListener {
+            val scrollY = re.scrollY;
+            val scrollx = re.scrollX;
+            Log.e("x", scrollY.toString())
+            if (scrollY >= 480) {
+                textView10.visibility = View.VISIBLE
+
+            } else {
+
+                textView10.visibility = View.GONE
+
+            }
+//            487
+            Log.e("Y", scrollx.toString())
+        }
+        re.setOnTouchListener(object : View.OnTouchListener {
+            private var observer: ViewTreeObserver? = null
+
+            override fun onTouch(v: View, event: MotionEvent): Boolean {
+                if (observer == null) {
+                    observer = re.viewTreeObserver
+                    observer!!.addOnScrollChangedListener(onScrollChangedListener)
+
+                } else if (!observer!!.isAlive) {
+
+
+                    observer!!.removeOnScrollChangedListener(onScrollChangedListener)
+                    observer = re.viewTreeObserver
+                    observer!!.addOnScrollChangedListener(onScrollChangedListener)
+                }
+
+                return false
+            }
+        })
+        bac.setOnClickListener {
+            showDiag()
         }
         addmo.setOnClickListener {
             addmone.visibility = View.VISIBLE
@@ -74,6 +110,7 @@ class home : Fragment() {
                 activity!!.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager?
             imm!!.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
         }
+
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -140,7 +177,8 @@ class home : Fragment() {
 
 
         if (b) {
-            val revealAnimator = ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, endRadius.toFloat())
+            val revealAnimator =
+                ViewAnimationUtils.createCircularReveal(view, cx, cy, 0f, endRadius.toFloat())
 
             view.visibility = View.VISIBLE
             revealAnimator.duration = 700
@@ -148,7 +186,8 @@ class home : Fragment() {
 
         } else {
 
-            val anim = ViewAnimationUtils.createCircularReveal(view, cx, cy, endRadius.toFloat(), 0f)
+            val anim =
+                ViewAnimationUtils.createCircularReveal(view, cx, cy, endRadius.toFloat(), 0f)
 
             anim.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
